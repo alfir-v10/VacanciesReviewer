@@ -101,19 +101,19 @@ class VacancyInfoByVacancyPage(VacancyInfoBySearchPage):
         self.allow_messages = self.getByKeyFromObject(self.vacancy, 'allow_messages')  # bool
 
         self.experience = self.getByKeyFromObject(self.vacancy, 'experience')  # dict
-        self.experienceId = self.getByKeyFromObject(self.experience, 'id')  # str
-        self.experienceName = self.getByKeyFromObject(self.experience, 'name')  # str
+        self.experience_id = self.getByKeyFromObject(self.experience, 'id')  # str
+        self.experience_name = self.getByKeyFromObject(self.experience, 'name')  # str
 
         self.employment = self.getByKeyFromObject(self.vacancy, 'employment')  # dict
-        self.employmentId = self.getByKeyFromObject(self.employment, 'id')
-        self.employmentName = self.getByKeyFromObject(self.employment, 'name')  # str
+        self.employment_id = self.getByKeyFromObject(self.employment, 'id')
+        self.employment_name = self.getByKeyFromObject(self.employment, 'name')  # str
 
         self.vacancy_description = self.getByKeyFromObject(self.vacancy, 'description')
-        self.key_skills = self.getByKeyFromObject(self.vacancy, 'key_skills')
+        self.key_skills = self.getByKeyFromObject(self.vacancy, 'key_skills')  # list of dict
         self.accept_handicapped = self.getByKeyFromObject(self.vacancy, 'accept_handicapped')  # bool
         self.accept_kids = self.getByKeyFromObject(self.vacancy, 'accept_kids')  # bool
-        self.specializations = self.getByKeyFromObject(self.vacancy, 'specializations')
-        self.professional_roles = self.getByKeyFromObject(self.vacancy, 'professional_roles')
+        self.specializations = self.getByKeyFromObject(self.vacancy, 'specializations')  # list of dicts
+        self.professional_roles = self.getByKeyFromObject(self.vacancy, 'professional_roles')  # list of dicts
         self.vacancy_code = self.getByKeyFromObject(self.vacancy, 'vacancy_code')
         self.hidden = self.getByKeyFromObject(self.vacancy, 'hidden')
         self.quick_responses_allowed = self.getByKeyFromObject(self.vacancy, 'quick_responses_allowed')
@@ -130,6 +130,28 @@ class VacancyInfoByVacancyPage(VacancyInfoBySearchPage):
         if req.status_code == 200:
             res = req.json()
             return res
+
+    @staticmethod
+    def getByKeyFromObject(dictionary: dict, key: str):
+        if dictionary:
+            return dictionary.setdefault(key)
+
+
+class KeySkills:
+    def __init__(self, key_skill):
+        self.key_skill = key_skill  # dict
+        self.key_skill_name = self.getByKeyFromObject(key_skill, 'name')  # str
+
+    @staticmethod
+    def getByKeyFromObject(dictionary: dict, key: str):
+        if dictionary:
+            return dictionary.setdefault(key)
+
+
+class DriverLicense:
+    def __init__(self, license):
+        self.license = license
+        self.license_id = self.getByKeyFromObject(self.license, 'id')
 
     @staticmethod
     def getByKeyFromObject(dictionary: dict, key: str):
@@ -180,10 +202,10 @@ class Language:
 class Specialization:
     def __init__(self, specialization):
         self.specialization = specialization  # dict
-        self.id = self.getByKeyFromObject(self.specialization, 'id') # str
-        self.name = self.getByKeyFromObject(self.specialization, 'name') # str
-        self.profarea_id = self.getByKeyFromObject(self.specialization, 'profarea_id') # str
-        self.profarea_name = self.getByKeyFromObject(self.specialization, 'profarea_name') # str
+        self.id = self.getByKeyFromObject(self.specialization, 'id')  # str
+        self.name = self.getByKeyFromObject(self.specialization, 'name')  # str
+        self.profarea_id = self.getByKeyFromObject(self.specialization, 'profarea_id')  # str
+        self.profarea_name = self.getByKeyFromObject(self.specialization, 'profarea_name')  # str
 
     @staticmethod
     def getByKeyFromObject(dictionary: dict, key: str):
