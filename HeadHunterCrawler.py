@@ -27,6 +27,13 @@ def add_row(row, session):
         session.rollback()
         print(e)
 
+def session_commit(session):
+    try:
+        session.commit()
+    except Exception as e:
+        session.rollback()
+        print(e)
+
 if __name__ == '__main__':
     text = 'data science'
     data = getVacancies(text, per_page=5)
@@ -133,11 +140,7 @@ if __name__ == '__main__':
                 driver_add = db.DriverLicenseTypes(vacancy_id=vacancy_add.id,
                                                    license_id=drive.license_id)
                 session.add(driver_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.languages:
             for obj in vacancy.languages:
@@ -154,11 +157,7 @@ if __name__ == '__main__':
                 session.add(lang_level_add)
                 session.add(lang_name_add)
                 session.add(lang_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.specializations:
             for obj in vacancy.specializations:
@@ -170,11 +169,7 @@ if __name__ == '__main__':
                                               profarea_id=prof_area_add.id)
                 session.add(prof_area_add)
                 session.add(spec_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.professional_roles:
             for obj in vacancy.professional_roles:
@@ -185,11 +180,7 @@ if __name__ == '__main__':
                                                      role_id=role_add.id)
                 session.add(role_add)
                 session.add(prof_role_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.key_skills:
             for obj in vacancy.key_skills:
@@ -197,11 +188,7 @@ if __name__ == '__main__':
                 key_skill_add = db.KeySkills(vacancy_id=vacancy_add.id,
                                              skill=key_skill.key_skill_name)
                 session.add(key_skill_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         salary_add = db.Salary(vacancy_id=vacancy_add.id,
                                salary_to=vacancy.salary_to,
@@ -224,11 +211,7 @@ if __name__ == '__main__':
                                       number=phone.number,
                                       comment=phone.comment)
                 session.add(phone_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         address_add = db.Address(vacancy_id=vacancy_add.id,
                                  address=vacancy.address,
@@ -252,11 +235,7 @@ if __name__ == '__main__':
                                                station_latitude=station.station_latitude,
                                                station_longitude=station.station_longitude)
                 session.add(station_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.working_days:
             for obj in vacancy.working_days:
@@ -265,11 +244,7 @@ if __name__ == '__main__':
                                                  day_id=working_day.work_id,
                                                  day_name=working_day.work_name)
                 session.add(working_day_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.working_time_intervals:
             for obj in vacancy.working_time_intervals:
@@ -278,11 +253,7 @@ if __name__ == '__main__':
                                                            interval_id=working_time.work_id,
                                                            interval_name=working_time.work_name)
                 session.add(working_time_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
 
         if vacancy.working_time_modes:
             for obj in vacancy.working_time_modes:
@@ -291,10 +262,6 @@ if __name__ == '__main__':
                                                         mode_id=working_modes.work_id,
                                                         mode_name=working_modes.work_name)
                 session.add(working_modes_add)
-            try:
-                session.commit()
-            except Exception as e:
-                session.rollback()
-                print(e)
+            session_commit(session)
     session.close()
 
