@@ -1,5 +1,5 @@
 import config
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey, Float
 from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
@@ -8,7 +8,7 @@ Base = declarative_base()
 class Vacancy(Base):
     __tablename__ = 'vacancies'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    vacancy_id = Column(String, unique=True)
+    vacancy_id = Column(String)
     name = Column(String)
     department_id = Column(Integer, ForeignKey('department.id'))
     type_id = Column(Integer, ForeignKey('type_vacancy.id'))
@@ -53,14 +53,14 @@ class Languages(Base):
 class LanguagesName(Base):
     __tablename__ = 'languages_name'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    language_id = Column(String, unique=True)
+    language_id = Column(String)
     language_name = Column(String)
 
 
 class LanguagesLevel(Base):
     __tablename__ = 'languages_level'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    language_level_id = Column(String, unique=True)
+    language_level_id = Column(String)
     language_level_name = Column(String)
 
 
@@ -82,7 +82,7 @@ class Specializations(Base):
 class ProfArea(Base):
     __tablename__ = 'profarea'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    profarea_id = Column(String, unique=True)
+    profarea_id = Column(String)
     profarea_name = Column(String)
 
 
@@ -96,7 +96,7 @@ class ProfessionalRoles(Base):
 class Roles(Base):
     __tablename__ = 'roles'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    role_id = Column(String, unique=True)
+    role_id = Column(String)
     role_name = Column(String)
 
 
@@ -110,35 +110,35 @@ class KeySkills(Base):
 class Employment(Base):
     __tablename__ = 'employment'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    employment_id = Column(String, unique=True)
+    employment_id = Column(String)
     employment_name = Column(String)
 
 
 class Experience(Base):
     __tablename__ = 'experience'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    experience_id = Column(String, unique=True)
+    experience_id = Column(String)
     experience_name = Column(String)
 
 
 class InsiderInterview(Base):
     __tablename__ = 'insider_interview'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    insider_interview_id = Column(String, unique=True)
+    insider_interview_id = Column(String)
     insider_interview_url = Column(String)
 
 
 class BillingType(Base):
     __tablename__ = 'billing_type'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    billing_type_id = Column(String, unique=True)
+    billing_type_id = Column(String)
     billing_type_name = Column(String)
 
 
 class Schedule(Base):
     __tablename__ = 'schedule'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    schedule_id = Column(String, unique=True)
+    schedule_id = Column(String)
     schedule_name = Column(String)
 
 
@@ -155,7 +155,7 @@ class Salary(Base):
 class Employer(Base):
     __tablename__ = 'employer'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    employer_id = Column(String, unique=True)
+    employer_id = Column(String)
     employer_name = Column(String)
     employer_trusted = Column(String)
     employer_url = Column(String)
@@ -183,7 +183,7 @@ class Phones(Base):
 class Area(Base):
     __tablename__ = 'area'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    area_id = Column(String, unique=True)
+    area_id = Column(String)
     area_name = Column(String)
     area_url = Column(String)
 
@@ -191,7 +191,7 @@ class Area(Base):
 class TypeVacancy(Base):
     __tablename__ = 'type_vacancy'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    type_id = Column(String, unique=True)
+    type_id = Column(String)
     type_name = Column(String)
 
 
@@ -199,25 +199,24 @@ class Address(Base):
     __tablename__ = 'address'
     id = Column(Integer, primary_key=True)
     vacancy_id = Column(Integer, ForeignKey('vacancies.id'))
-    address = Column(String)
     city = Column(String)
     street = Column(String)
     building = Column(String)
     address_description = Column(String)
-    address_latitude = Column(String)
-    address_longitude = Column(String)
+    address_latitude = Column(Float)
+    address_longitude = Column(Float)
     address_raw = Column(String)
 
 
 class Metro(Base):
     __tablename__ = 'metro'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    station_id = Column(String, unique=True)
+    station_id = Column(String)
     station_name = Column(String)
     line_id = Column(String)
     line_name = Column(String)
-    station_latitude = Column(String)
-    station_longitude = Column(String)
+    station_latitude = Column(Float)
+    station_longitude = Column(Float)
 
 
 class MetroStations(Base):
@@ -235,7 +234,7 @@ class MetroStations(Base):
 class Department(Base):
     __tablename__ = 'department'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    department_id = Column(String, unique=True)
+    department_id = Column(String)
     department_name = Column(String)
 
 
