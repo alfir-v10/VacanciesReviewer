@@ -2,7 +2,6 @@
 import requests
 import config
 
-
 class VacancyInfoBySearchPage:
     def __init__(self, vacancy):
         self.vacancy_id = self.getByKeyFromObject(vacancy, 'id')  # str
@@ -229,7 +228,7 @@ class Metro:
             return dictionary.setdefault(key)
 
 
-class Contacts:
+class Phones:
     def __init__(self, contact):
         self.contact = contact  # dict
         self.country = self.getByKeyFromObject(self.contact, 'country')  # str
@@ -243,16 +242,9 @@ class Contacts:
             return dictionary.setdefault(key)
 
 
-def getVacancies(text, page=0, per_page=100):
-    url = f"{config.URL_HEADHUNTER}/vacancies?text='{text}'&page={page}&per_page={per_page}"
-    print(url)
-    req = requests.get(url)
-    if req.status_code == 200:
-        res = req.json()
-        return res
-
-
 if __name__ == '__main__':
+    from utils import getVacancies
+
     text = 'data science'
     data = getVacancies(text, per_page=5)
     items = data['items']
