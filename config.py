@@ -5,7 +5,7 @@ DATABASE = {
     'password': 'postgres',
     'host': 'localhost',
     'port': 5432,
-    'database_name': 'HeadHunterDatabase',
+    'database_name': 'hh',
     'driver_name': 'postgresql',
     'driver': 'psycopg2'
 }

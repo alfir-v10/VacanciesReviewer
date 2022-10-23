@@ -1,6 +1,9 @@
 # https://dev.hh.ru/
 import requests
 import config
+from types import SimpleNamespace
+import json
+
 
 class VacancyInfoBySearchPage:
     def __init__(self, vacancy):
@@ -128,6 +131,7 @@ class VacancyInfoByVacancyPage(VacancyInfoBySearchPage):
         req = requests.get(url)
         if req.status_code == 200:
             res = req.json()
+            req.close()
             return res
 
     @staticmethod
@@ -243,10 +247,9 @@ class Phones:
 
 
 if __name__ == '__main__':
-    from utils import getVacancies
-
+    from utils import getVacanciesLikeJson
     text = 'data science'
-    data = getVacancies(text, per_page=5)
+    data = getVacanciesLikeJson(text, per_page=5)
     items = data['items']
     for item in items:
         vacancy = VacancyInfoByVacancyPage(vacancy=item)
