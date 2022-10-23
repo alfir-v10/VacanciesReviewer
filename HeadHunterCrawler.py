@@ -376,7 +376,7 @@ def runCrawler(text_list, date_from, date_to, weeks=0, days=0, hours=0, minutes=
 
 
 if __name__ == '__main__':
-    text_list = ['python']
-    date_from = '2022-09-28T12:00:00'
+    text_list = ['data']
+    date_from = '2022-09-01T12:00:00'
     date_to = '2022-10-23T00:00:00'
     runCrawler(text_list, date_from=date_from, date_to=date_to, weeks=0, days=1, hours=6, minutes=0, seconds=0)
